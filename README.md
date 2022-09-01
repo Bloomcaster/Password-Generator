@@ -1,6 +1,7 @@
 # Password-Generator
 
-file:///C:/Users/Tahlia/bootcamp/Password-Generator/index.html
+[Deployed Link HERE](https://bloomcaster.github.io/Password-Generator/)
+
 
 
 <img width="633" alt="password generator " src="https://user-images.githubusercontent.com/108914519/188018135-1f010f5b-f236-485b-84ac-3f20dc5cb66e.png">
