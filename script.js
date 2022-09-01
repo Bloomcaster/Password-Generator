@@ -1,65 +1,86 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+function generatePassword() {
 
+  var charChoice = "";
 //parameters for choices for the password lowercase, uppercase, numerical and special characters
-let lowercaseChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-let uppercaseChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-let numericalChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-let specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "+"];
-let masterArray =[];
-let randomPassword ="";
+var uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowercaseChar = "abcdefghijklmnopqrstuvwxyz";
+var numericalChar = "0123456789";
+var specialChar = "!~+_$";
+
+
+//letting user know the parameters for how many characters to use for the password
+var userCharAmount = window.prompt ("How many characters woudl you like for your password? Must be between 8 and 128 characters in length.")
+
+//parsing together the string that character number 
+var charNumber = parseInt(userCharAmount)
+
+if (typeInLettersEtc(userCharAmount)){
+  window.alert("Enter a proper number between 8 and 128.")
+}
+
+if (charNumber<8 || charNumber >128){
+  window.alert("Enter proper number between 8 and 128.")
+}
+
+
+
+
+var useLowercaseChar = window.confirm("Want to use some lowercase characters?");
+var useUppercaseChar = window.confirm("Want to use some uppercase characters?");
+var useNumericalChar = window.confirm("Want to use some numerical characters?");
+var useSpecialChar = window.confirm("Want to use some special characters?");
+}
+
+
+//setting up the character requirements so that they must choose at least one of types of characters
+if ( 
+  useLowercaseChar === false &&
+  useUppercaseChar === false &&
+  useNumericalChar === false &&
+  useSpecialChar === false
+) {
+  window.alert("Must select at least on of the character types offered.")
+}
+
+if (useLowercaseChar) {
+  charChoice +=
+  lowercaseChar
+}
+
+if (useUppercaseChar) {
+  charChoice +=
+uppercaseChar
+}
+if (useNumericalChar) {
+ charChoice +=
+  numericalChar
+}
+if (useSpecialChar){
+ charChoice +=
+  specialChar
+}
+
+var password = ""
+
+
+//says password length not defined on page, need to work on this!! line 45, just added those numbers, red error left page but doesnt work (maybe fixed!!)
+for (var i = 0; i <charNumber; i++) {
+  password += charChoice(Math.floor(Math.random()*(charChoice)));
+} 
+
+
+
+
 
 // Write password to the #password input
 function writePassword() {
- var password = generatePassword(""); 
- var passwordLength = prompt("How many characters would you like for your password? Must be between 8 and 128 characters");
- passwordLength = parseInt(passwordLength);
- if (passwordLength <8) {
- alert("Must use more than 7 characters!");
- return"";
+
+var password = generatePassword();
+var passwordText = document.querySelector("#password");
+
+passwordText.value = password;
 }
-
-if (passwordLength >128) {
-  alert("Must use no more than 128 characters!");
-  return"";
-}
-}
-//section creates prompts for the user to select lowercase, uppercase, numerical and special characters for their password
-let useLowercaseChar = confirm("Want to use some lowercase characters?");
-if (lowercaseChar ===true) {
-  masterArray += lowercaseChar;
-}
-let useUppercaseChar = confirm("Want to use some uppercase characters?");
-if (uppercaseChar ===true) {
- masterArray += uppercaseChar;
-}
-let useNumericalChar = confirm("Want to use some numerical characters?");
-if (numericalChar ===true) {
- masterArray += numericalChar;
-}
-let useSpecialChar = confirm("Want to use some special characters?");
-if (specialChar ===true) {
- masterArray += specialChar;
-}
-
-for (let i = 0; i <passwordLength; i++) {
-  randomPassword +=masterArray[Math.floor(Math.random()*(masterArray.length))];
-  console.log(Math.floor(Math.random()* (masterArray.length)));
-  console.log(randomPassword);
-}
-
-  var passwordText = document.querySelector("#password");
-
-
-
-
-
-
-
-
-  passwordText.value = password;
-
-
-
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", generatePassword);
